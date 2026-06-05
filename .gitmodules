@@ -1,0 +1,12 @@
+[submodule "millennium-bin"]
+	path = millennium-bin
+	url = ssh://aur@aur.archlinux.org/millennium-bin.git
+[submodule "astra-music-git"]
+	path = astra-music-git
+	url = ssh://aur@aur.archlinux.org/astra-music-git.git
+[submodule "grok-desktop-bin"]
+	path = grok-desktop-bin
+	url = ssh://aur@aur.archlinux.org/grok-desktop-bin.git
+[submodule "starnet2-bin"]
+	path = starnet2-bin
+	url = ssh://aur@aur.archlinux.org/starnet2-bin.git
