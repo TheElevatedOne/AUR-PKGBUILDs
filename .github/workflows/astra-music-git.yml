@@ -12,6 +12,9 @@ jobs:
       image: archlinux:base-devel
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Install tools
         run: |
@@ -31,7 +34,7 @@ jobs:
           cd /home/git
           git clone https://github.com/Boof2015/astra.git -b dev
           cd astra
-          VERSION_GIT="$(git describe --tags --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/_/g')"
+          VERSION_GIT="$(git describe --tags --long --abbrev=7 | sed 's/-/_/g')"
           VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/astra-music-git/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
           
           echo "[INFO] GIT VERSION: ${VERSION_GIT}"

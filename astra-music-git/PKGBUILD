@@ -17,7 +17,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "${srcdir}/astra"
-  git describe --tags --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/_/g'
+  git describe --tags --long --abbrev=7 | sed 's/-/_/g'
 }
 
 prepare() {
