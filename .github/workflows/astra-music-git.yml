@@ -1,4 +1,4 @@
-name: astra-music-git daily update
+name: astra-music-git
 
 on:
   schedule:
