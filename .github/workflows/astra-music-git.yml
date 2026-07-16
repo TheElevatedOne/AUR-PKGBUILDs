@@ -1,0 +1,74 @@
+name: astra-music-git daily update
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # Daily 03:00 UTC (change as needed)
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: pacman -Syu --noconfirm git openssh
+
+      - name: Setup AUR SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts
+
+      - name: Check for a new version
+        id: check
+        run: |
+          mkdir -p /home/git
+          cd /home/git
+          git clone https://github.com/Boof2015/astra.git -b dev
+          cd astra
+          VERSION_GIT="$(git describe --tags --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/_/g')"
+          VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/astra-music-git/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
+          if [[ "${VERSION_GIT}" != "${VERSION_AUR}" ]]; then
+            echo "${VERSION_GIT}" > /home/VERSION
+            echo "change=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "change=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Regenerate .SRCINFO (runs pkgver() against latest upstream)
+        if: steps.check.outputs.change == 'true'
+        run: |
+          useradd -m -s /bin/bash builder 2>/dev/null || true
+          mkdir -p /home/builder/build
+          cp -a "${GITHUB_WORKSPACE}/astra-music-git/." /home/builder/build/
+          sed -i 's/^pkgver=.*/pkgver='"$(cat /home/VERSION)"'/' /home/builder/build/PKGBUILD
+          chown -R builder:builder /home/builder/build
+          runuser -u builder -- bash -lc '
+            cd /home/builder/build
+            makepkg --printsrcinfo > .SRCINFO
+          '
+          cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/astra-music-git/.SRCINFO"
+          cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/astra-music-git/PKGBUILD"
+
+      - name: Commit to GitHub (if changed)
+        if: steps.check.outputs.change == 'true'
+        run: |
+          cd "${GITHUB_WORKSPACE}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .SRCINFO
+          git commit -m "chore: update pkgver from upstream git"
+          git push
+
+      - name: Push to AUR (if changed)
+        if: steps.check.outputs.change == 'true'
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+        run: |
+          cd "${GITHUB_WORKSPACE}/astra-music-git"
+          git remote add aur "ssh://aur@aur.archlinux.org/astra-music-git.git" 2>/dev/null || true
+          git push aur HEAD:master
