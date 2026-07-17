@@ -84,6 +84,8 @@ jobs:
           git fetch aur
           git reset --hard aur/master
 
+          ls -la
+
           cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
           cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
           
