@@ -92,13 +92,13 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git" 2>/dev/null || true
-          git fetch aur
+          git pull --rebase aur master
           git push aur HEAD:master
 
       - name: Cleanup in Case of Failure
         if: always() && (steps.gh-push.outcome == 'failure' || steps.aur-push.outcome == 'failure')
         run: |
-          cp "/home/${{ env.PKGNAME }}/PKGNAME" "/home/${{ env.PKGNAME }}/.SRCINFO" "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/"
+          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/"
           cd "${GITHUB_WORKSPACE}"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
