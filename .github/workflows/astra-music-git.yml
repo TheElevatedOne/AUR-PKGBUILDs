@@ -93,6 +93,9 @@ jobs:
           cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git" 2>/dev/null || true
           git pull --rebase aur master
+          ls -la
+          git add .
+          git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
           git push aur HEAD:master
 
       - name: Cleanup in Case of Failure
@@ -102,6 +105,9 @@ jobs:
           cd "${GITHUB_WORKSPACE}"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
+          git pull --rebase
           git add .
           git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
           git push origin HEAD
