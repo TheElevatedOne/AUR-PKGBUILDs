@@ -73,17 +73,6 @@ jobs:
           # cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
           # cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
 
-      - name: Commit to GitHub (if changed)
-        id: gh-push
-        if: steps.check.outputs.change == 'true'
-        run: |
-          cd "${GITHUB_WORKSPACE}"
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
-          git push origin HEAD
-
       - name: Push to AUR (if changed)
         id: aur-push
         if: steps.check.outputs.change == 'true'
@@ -101,6 +90,17 @@ jobs:
           git add .
           git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
           git push aur HEAD:master
+
+      - name: Commit to GitHub (if changed)
+        id: gh-push
+        if: steps.check.outputs.change == 'true'
+        run: |
+          cd "${GITHUB_WORKSPACE}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
+          git push origin HEAD
 
       - name: Cleanup in Case of Failure
         if: always() && (steps.gh-push.outcome == 'failure' || steps.aur-push.outcome == 'failure')
