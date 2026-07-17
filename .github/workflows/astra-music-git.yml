@@ -13,15 +13,15 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
-
       - name: Install tools
         run: |
           pacman -Syu --noconfirm git openssh
 
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          
       - name: Setup AUR SSH
         run: |
           mkdir -p ~/.ssh
