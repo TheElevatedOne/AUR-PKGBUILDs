@@ -92,6 +92,9 @@ jobs:
 
           git add .
           git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
+
+          ls -la
+
           git push aur HEAD:master
           rm -rf "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.git"
 
