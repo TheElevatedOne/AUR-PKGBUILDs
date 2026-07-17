@@ -82,7 +82,7 @@ jobs:
           cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
 
           # Start a clean temporary repo for AUR
-          rm -rf .git
+          rm -rf .git .SRCINFO PKGBUILD
           git init
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git"
           git fetch aur
