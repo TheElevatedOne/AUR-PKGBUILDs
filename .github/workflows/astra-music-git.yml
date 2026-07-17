@@ -70,8 +70,8 @@ jobs:
             cd /home/builder/build
             makepkg --printsrcinfo > .SRCINFO
           '
-          cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
-          cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
+          # cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
+          # cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
 
       - name: Commit to GitHub (if changed)
         id: gh-push
@@ -92,8 +92,12 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git" 2>/dev/null || true
-          git pull --rebase aur master
-          ls -la
+          git fetch aur
+          git reset --hard aur/master
+
+          cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
+          cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
+
           git add .
           git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
           git push aur HEAD:master
@@ -101,13 +105,21 @@ jobs:
       - name: Cleanup in Case of Failure
         if: always() && (steps.gh-push.outcome == 'failure' || steps.aur-push.outcome == 'failure')
         run: |
-          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/"
+          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" \
+            "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/" || true
+
           cd "${GITHUB_WORKSPACE}"
+
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
-          git pull --rebase
-          git add .
-          git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
-          git push origin HEAD
+
+          git add "${{ env.PKGNAME }}/PKGBUILD" "${{ env.PKGNAME }}/.SRCINFO" || true
+
+          # Only commit when there are actual changes
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
+            git pull --rebase
+            git push
+          else
+            echo "No changes to commit after failure"
+          fi
