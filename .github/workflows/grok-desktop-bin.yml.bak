@@ -1,4 +1,4 @@
-name: astra-music-git
+name: grok-desktop-bin
 
 on:
   schedule:
@@ -10,17 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: archlinux:base-devel
-    permissions:
-      contents: write
     steps:
-      - name: Install tools
-        run: |
-          pacman -Syu --noconfirm git openssh
-
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+
+      - name: Install tools
+        run: |
+          pacman -Syu --noconfirm git openssh
 
       - name: Setup AUR SSH
         run: |
@@ -52,6 +50,7 @@ jobs:
       - name: Regenerate .SRCINFO (runs pkgver() against latest upstream)
         if: steps.check.outputs.change == 'true'
         run: |
+          echo "$(ls -a "${GITHUB_WORKSPACE}")"
           useradd -m -s /bin/bash builder 2>/dev/null || true
           mkdir -p /home/builder/build
           cp -a "${GITHUB_WORKSPACE}/astra-music-git/." /home/builder/build/
@@ -64,23 +63,15 @@ jobs:
           cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/astra-music-git/.SRCINFO"
           cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/astra-music-git/PKGBUILD"
 
-      - name: Test
-        run: |
-          echo "[INFO] General ls:"
-          ls -la
-          echo "[INFO] PWD ls:"
-          ls -la "$(pwd)"
-          echo "[INFO] GITHUB_WORKSPACE ls:"
-          ls -la "${GITHUB_WORKSPACE}"
-
       - name: Commit to GitHub (if changed)
         if: steps.check.outputs.change == 'true'
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cd "${GITHUB_WORKSPACE}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .SRCINFO
           git commit -m "chore: update pkgver from upstream git"
-          git push origin HEAD
+          git push
 
       - name: Push to AUR (if changed)
         if: steps.check.outputs.change == 'true'
