@@ -12,11 +12,15 @@ jobs:
       image: archlinux:base-devel
     permissions:
       contents: write
+    env:
+      PKGNAME: astra-music-git
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: ${{ github.workspace }}
     steps:
-      - name: Set-up Workspace
+      - name: Install Tools
         run: |
           pacman -Syu --noconfirm git openssh
-          echo "PKGNAME=astra-music-git" >> "$GITHUB_ENV"
 
       - uses: actions/checkout@v4
         with:
