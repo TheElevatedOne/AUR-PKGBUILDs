@@ -53,6 +53,10 @@ jobs:
           else
             echo "change=false" >> "$GITHUB_OUTPUT"
           fi
+      
+      - name: Back-up Original PKGBUILD in Case of Failure
+        run: |
+          cp -r "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}" /home
 
       - name: Regenerate .SRCINFO (runs pkgver() against latest upstream)
         if: steps.check.outputs.change == 'true'
@@ -70,6 +74,7 @@ jobs:
           cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
 
       - name: Commit to GitHub (if changed)
+        id: gh-push
         if: steps.check.outputs.change == 'true'
         run: |
           cd "${GITHUB_WORKSPACE}"
@@ -80,6 +85,7 @@ jobs:
           git push origin HEAD
 
       - name: Push to AUR (if changed)
+        id: aur-push
         if: steps.check.outputs.change == 'true'
         env:
           GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
@@ -88,3 +94,17 @@ jobs:
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git" 2>/dev/null || true
           git fetch aur
           git push aur HEAD:master
+
+      - name: Cleanup in Case of Failure
+        if: always() && (
+          steps.gh-push.outcome == 'failure' ||
+          steps.aur-push.outcome == 'failure'
+        )
+        run: |
+          cp "/home/${{ env.PKGNAME }}/PKGNAME" "/home/${{ env.PKGNAME }}/.SRCINFO" "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/"
+          cd "${GITHUB_WORKSPACE}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
+          git push origin HEAD
