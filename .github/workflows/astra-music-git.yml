@@ -86,5 +86,5 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git" 2>/dev/null || true
-          git pull --rebase
+          git fetch aur
           git push aur HEAD:master
