@@ -6,23 +6,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  update:
+  aur-check-and-update:
     runs-on: ubuntu-latest
     container:
       image: archlinux:base-devel
     permissions:
       contents: write
     steps:
-      - name: Install tools
+      - name: Set-up Workspace
         run: |
           pacman -Syu --noconfirm git openssh
+          echo "PKGNAME=astra-music-git" >> "$GITHUB_ENV"
 
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Setup AUR SSH
+      - name: Set-up AUR SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
@@ -37,7 +38,7 @@ jobs:
           git clone https://github.com/Boof2015/astra.git -b dev
           cd astra
           VERSION_GIT="$(git describe --tags --long --abbrev=7 | sed 's/-/_/g')"
-          VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/astra-music-git/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
+          VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
           
           echo "[INFO] GIT VERSION: ${VERSION_GIT}"
           echo "[INFO] AUR VERSION: ${VERSION_AUR}"
@@ -54,32 +55,24 @@ jobs:
         run: |
           useradd -m -s /bin/bash builder 2>/dev/null || true
           mkdir -p /home/builder/build
-          cp -a "${GITHUB_WORKSPACE}/astra-music-git/." /home/builder/build/
+          cp -a "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/." /home/builder/build/
           sed -i 's/^pkgver=.*/pkgver='"$(cat /home/VERSION)"'/' /home/builder/build/PKGBUILD
           chown -R builder:builder /home/builder/build
           runuser -u builder -- bash -lc '
             cd /home/builder/build
             makepkg --printsrcinfo > .SRCINFO
           '
-          cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/astra-music-git/.SRCINFO"
-          cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/astra-music-git/PKGBUILD"
-
-      - name: Test
-        run: |
-          echo "[INFO] General ls:"
-          ls -la
-          echo "[INFO] PWD ls:"
-          ls -la "$(pwd)"
-          echo "[INFO] GITHUB_WORKSPACE ls:"
-          ls -la "${GITHUB_WORKSPACE}"
+          cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
+          cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
 
       - name: Commit to GitHub (if changed)
         if: steps.check.outputs.change == 'true'
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .SRCINFO
-          git commit -m "chore: update pkgver from upstream git"
+          cd "${GITHUB_WORKSPACE}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
           git push origin HEAD
 
       - name: Push to AUR (if changed)
@@ -87,6 +80,6 @@ jobs:
         env:
           GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
         run: |
-          cd "${GITHUB_WORKSPACE}/astra-music-git"
-          git remote add aur "ssh://aur@aur.archlinux.org/astra-music-git.git" 2>/dev/null || true
+          cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
+          git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git" 2>/dev/null || true
           git push aur HEAD:master
