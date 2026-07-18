@@ -73,7 +73,7 @@ jobs:
           sed -i "s|^source=.*|source=(\"${NEW_SOURCE}\")|" /home/builder/build/PKGBUILD
           sed -i "s|^sha256sums=.*|sha256sums=('${SHA256}')|" /home/builder/build/PKGBUILD
           SRCDIR=$(ls /home/sources | sed "s/_$(cat /home/VERSION)/_\${pkgver}/" | sed 's/.zip//')
-          sed -i "s|^_srcdir=.*|_srcdir=\"\${srcdir}/${SRCDIR}\"|" /home/builder/build/PKGBUILD
+          sed -i "s|_srcdir=.*|_srcdir=\"\${srcdir}/${SRCDIR}\"|" /home/builder/build/PKGBUILD
 
           chown -R builder:builder /home/builder/build
           runuser -u builder -- bash -lc '
