@@ -69,7 +69,7 @@ jobs:
           wget -P /home/sources "$SOURCE"
           SHA256="$(sha256sum "/home/sources/$(ls /home/sources)" -z | cut -d' ' -f1)"
           VERSION=$(cat /home/VERSION)
-          NEW_SOURCE=$(echo "$SOURCE" | sed "s/_${VERSION}_/\${pkgver}_/")
+          NEW_SOURCE=$(echo "$SOURCE" | sed "s/_${VERSION}/_\${pkgver}/")
           sed -i "s|^source=.*|source=(\"${NEW_SOURCE}\")|" /home/builder/build/PKGBUILD
           sed -i "s|^sha256sums=.*|sha256sums=('${SHA256}')|" /home/builder/build/PKGBUILD
           SRCDIR=$(ls /home/sources | sed "s/_$(cat /home/VERSION)/_\${pkgver}/" | sed 's/.zip//')
