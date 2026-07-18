@@ -1,0 +1,155 @@
+name: grok-desktop-bin
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # Daily 03:00 UTC (change as needed)
+  workflow_dispatch:
+
+jobs:
+  aur-check-and-update:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    permissions:
+      contents: write
+    env:
+      PKGNAME: grok-desktop-bin
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: ${{ github.workspace }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Install Tools
+        run: |
+          pacman -Syu --noconfirm git openssh jq github-cli wget coreutils
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set-up AUR SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts
+
+      - name: Check for a new version
+        id: check
+        run: |
+          VERSION_GIT=$(gh api "repos/Ash-Bash/Grok-Desktop-Wrapper/releases/latest" --jq '.tag_name')
+          VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
+          
+          echo "[INFO] GIT VERSION: ${VERSION_GIT}"
+          echo "[INFO] AUR VERSION: ${VERSION_AUR}"
+
+          if [[ "${VERSION_GIT}" != "${VERSION_AUR}" ]]; then
+            echo "${VERSION_GIT}" > /home/VERSION
+            echo "change=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "change=false" >> "$GITHUB_OUTPUT"
+          fi
+      
+      - name: Back-up Original PKGBUILD in Case of Failure
+        run: |
+          cp -r "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}" /home
+
+      - name: Regenerate .SRCINFO (runs pkgver() against latest upstream)
+        if: steps.check.outputs.change == 'true'
+        run: |
+          useradd -m -s /bin/bash builder 2>/dev/null || true
+          mkdir -p /home/builder/build
+          mkdir -p /home/sources
+
+          cp -a "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/." /home/builder/build/
+          sed -i 's/^pkgver=.*/pkgver='"$(cat /home/VERSION)"'/' /home/builder/build/PKGBUILD
+
+          mapfile -t SOURCE_ARR < <(gh api "repos/Ash-Bash/Grok-Desktop-Wrapper/releases/latest" --jq '.assets.[].browser_download_url' | grep '.deb')
+          for source in ${SOURCE_ARR[@]}; do
+            wget -P /home/sources/ "$source"
+          done
+          for file in $(ls /home/sources); do
+            SHA256="$(sha256sum "/home/sources/$file" -z | cut -d' ' -f1)"
+            case "$file" in
+              *_amd64*)
+                sed -i 's/^sha256sums_x86_64=.*/sha256sums_x86_64=\('"'$SHA256'"'\)/' /home/builder/build/PKGBUILD
+                ;;
+              *_arm64*)
+                sed -i 's/^sha256sums_aarch64=.*/sha256sums_aarch64=\('"'$SHA256'"'\)/' /home/builder/build/PKGBUILD
+                ;;
+              *_armv7l*)
+                sed -i 's/^sha256sums_armv7h=.*/sha256sums_armv7h=\('"'$SHA256'"'\)/' /home/builder/build/PKGBUILD
+                ;;
+            esac
+          done
+
+          chown -R builder:builder /home/builder/build
+          runuser -u builder -- bash -lc '
+            cd /home/builder/build
+            makepkg --printsrcinfo > .SRCINFO
+          '
+          # cp /home/builder/build/.SRCINFO "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/.SRCINFO"
+          # cp /home/builder/build/PKGBUILD "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD"
+
+      - name: Push to AUR (if changed)
+        id: aur-push
+        if: steps.check.outputs.change == 'true'
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+        run: |
+          cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
+
+          # Start a clean temporary repo for AUR
+          rm -rf .git .SRCINFO PKGBUILD
+          git init
+          git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git"
+          git fetch aur
+          git checkout -b master aur/master
+
+          # Copy the updated files (now at the real root)
+          cp /home/builder/build/PKGBUILD .
+          cp /home/builder/build/.SRCINFO .
+
+          git config user.name "${{ secrets.AUR_USERNAME }}"
+          git config user.email "${{ secrets.AUR_EMAIL }}"
+
+          git add PKGBUILD .SRCINFO
+          git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
+          git push aur HEAD:master
+
+          # Clean up so the main repo stays clean
+          rm -rf .git
+
+      - name: Commit to GitHub (if changed)
+        id: gh-push
+        if: steps.check.outputs.change == 'true'
+        run: |
+          cd "${GITHUB_WORKSPACE}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: update ${{ env.PKGNAME }} pkgver from upstream git"
+          git push origin HEAD
+
+      - name: Cleanup in Case of Failure
+        if: always() && (steps.gh-push.outcome == 'failure' || steps.aur-push.outcome == 'failure')
+        run: |
+          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" \
+            "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/" || true
+
+          cd "${GITHUB_WORKSPACE}"
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "${{ env.PKGNAME }}/PKGBUILD" "${{ env.PKGNAME }}/.SRCINFO" || true
+
+          # Only commit when there are actual changes
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
+            git pull --rebase
+            git push
+          else
+            echo "No changes to commit after failure"
+          fi
