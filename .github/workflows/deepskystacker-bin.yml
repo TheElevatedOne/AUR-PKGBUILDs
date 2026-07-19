@@ -17,6 +17,7 @@ jobs:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
       GIT_CONFIG_VALUE_0: ${{ github.workspace }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Install Tools
         run: |
@@ -37,7 +38,7 @@ jobs:
       - name: Check for a new version
         id: check
         run: |
-          VERSION_GIT="$(gh api 'repos/deepskystacker/DSS/releases/latest' | jq -r ".tag_name")"
+          VERSION_GIT="$(gh api 'repos/deepskystacker/DSS/releases/latest' --jq ".tag_name")"
           VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
           
           echo "[INFO] GIT VERSION: ${VERSION_GIT}"
