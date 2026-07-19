@@ -2,7 +2,7 @@ name: starnet2-bin
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # Daily 03:00 UTC (change as needed)
+    - cron: '0 22 * * *'   # Daily 03:00 UTC (change as needed)
   workflow_dispatch:
 
 jobs:
