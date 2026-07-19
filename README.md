@@ -2,6 +2,14 @@
 
 Collection of the packages I am maintaining on AUR
 
+## Table of Contents
+
+- [astra-music-bin](#astra-music-bin)
+- [grok-desktop-bin](#grok-desktop-bin)
+- [starnet2-bin](#starnet2-bin)
+- [millennium-bin](#millennium-bin)
+- [deepskystacker-bin](#deepskystacker-bin)
+
 ## Packages
 
 ### astra-music-git
