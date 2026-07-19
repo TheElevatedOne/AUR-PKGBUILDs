@@ -48,8 +48,10 @@ jobs:
           else
             VERSION_GIT="${VERSIONS_GIT[0]}"
           fi
+
+          VERSION_GIT="$(sed -s 's/^v//;s/-/_/g' <<< "${VERSION_GIT}")"
           VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
-          
+
           echo "[INFO] GIT VERSION: ${VERSION_GIT}"
           echo "[INFO] AUR VERSION: ${VERSION_AUR}"
 
