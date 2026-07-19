@@ -42,7 +42,7 @@ Collection of the packages I am maintaining on AUR
 
 ### deepskystacker-bin
 
-[![deepskystacker-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/deepskystacker.yml?style=for-the-badge&logo=archlinux&label=deepskystacker-bin)](https://aur.archlinux.org/packages/deepskystacker-bin)
+[![deepskystacker-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/deepskystacker-bin.yml?style=for-the-badge&logo=archlinux&label=deepskystacker-bin)](https://aur.archlinux.org/packages/deepskystacker-bin)
 
 <a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/deepskystacker-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/deepskystacker-bin.png?raw=true"></a>
 
