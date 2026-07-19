@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Install Tools
         run: |
-          pacman -Syu --noconfirm git openssh github-api jq
+          pacman -Syu --noconfirm git openssh github-cli jq
 
       - uses: actions/checkout@v4
         with:
