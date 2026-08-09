@@ -100,7 +100,7 @@ jobs:
           # Copy the updated files (now at the real root)
           cp /home/builder/build/PKGBUILD .
           cp /home/builder/build/.SRCINFO .
-          cp /home/builder/build/millennium-bin.install
+          cp /home/builder/build/millennium-bin.install .
 
           git config user.name "${{ secrets.AUR_USERNAME }}"
           git config user.email "${{ secrets.AUR_EMAIL }}"
