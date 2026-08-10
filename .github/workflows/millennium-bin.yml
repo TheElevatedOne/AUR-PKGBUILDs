@@ -126,7 +126,7 @@ jobs:
       - name: Cleanup in Case of Failure
         if: always() && (steps.gh-push.outcome == 'failure' || steps.aur-push.outcome == 'failure')
         run: |
-          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" \
+          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" "/home/${{ env.PKGNAME }}/millennium-bin.install" \
             "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/" || true
 
           cd "${GITHUB_WORKSPACE}"
