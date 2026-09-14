@@ -68,11 +68,11 @@ jobs:
           SOURCE="$(curl -s https://starnetastro.com/cli-tools/starnet/ | htmlq 'section.download-version-group' 'article.artifact-card' 'div.artifact-file-row' 'a' --attribute href | grep linux | grep zip | head -1)"
           wget -P /home/sources "$SOURCE"
           SHA256="$(sha256sum "/home/sources/$(ls /home/sources)" -z | cut -d' ' -f1)"
-          VERSION=$(cat /home/VERSION)
-          NEW_SOURCE=$(echo "$SOURCE" | sed "s/_${VERSION}/_\${pkgver}/")
+          NEWVER=$(basename "$SOURCE" | sed -E 's/^starnet2_linux_([0-9]+\.[0-9]+\.[0-9]+)-.*/\1/')
+          NEW_SOURCE=$(echo "$SOURCE" | sed "s/_${NEWVER}/_\${pkgver}/")
           sed -i "s|^source=.*|source=(\"${NEW_SOURCE}\")|" /home/builder/build/PKGBUILD
           sed -i "s|^sha256sums=.*|sha256sums=('${SHA256}')|" /home/builder/build/PKGBUILD
-          SRCDIR=$(ls /home/sources | sed "s/_$(cat /home/VERSION)/_\${pkgver}/" | sed 's/.zip//')
+          SRCDIR=$(basename "$SOURCE" .zip | sed "s/_${NEWVER}/_\${pkgver}/")
           sed -i "s|_srcdir=.*|_srcdir=\"\${srcdir}/${SRCDIR}\"|" /home/builder/build/PKGBUILD
 
           chown -R builder:builder /home/builder/build
