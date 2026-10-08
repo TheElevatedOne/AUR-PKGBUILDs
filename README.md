@@ -62,3 +62,11 @@ Collection of the packages I am maintaining on AUR
 - **Github Repository:** https://github.com/deepskystacker/DSS
 - **Website:** http://deepskystacker.free.fr/english/index.html
 - **Reason for Packaging:** Used it a lot on Windows, then a lot via Wine. Linux version should be on the AUR.
+
+### booruflow-bin
+
+[![booruflow-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/booruflow-bin.yml?style=for-the-badge&logo=archlinux&label=booruflow-bin)](https://aur.archlinux.org/packages/booruflow-bin)
+
+- ***An open-source, cross-platform booru browser and image downloader.***
+- **Github Repository:** https://github.com/normalllll/BooruFlow
+- **Reason for Packaging:** Good looking Image Board App for Desktop? Sign me on.

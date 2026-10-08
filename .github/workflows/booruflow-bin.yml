@@ -1,0 +1,149 @@
+name: booruflow-bin
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  aur-check-and-update:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    permissions:
+      contents: write
+    env:
+      PKGNAME: booruflow-bin
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: ${{ github.workspace }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Install Tools
+        run: |
+          pacman -Syu --noconfirm git openssh jq github-cli wget coreutils
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set-up AUR SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts
+
+      - name: Check for a new version
+        id: check
+        run: |
+          TAG="$(gh api 'repos/normalllll/BooruFlow/releases/latest' --jq '.tag_name')"
+          # tag is v0.11.0+38 → pkgver 0.11.0, build 38
+          VERSION_GIT="$(sed -E 's/^v//; s/\+.*//' <<< "${TAG}")"
+          BUILD="$(sed -E 's/^v[0-9.]+//' <<< "${TAG}" | tr -d '+')"
+          VERSION_AUR="$(grep '^pkgver=' "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD" | cut -d= -f2 | tr -d '"')"
+
+          echo "[INFO] TAG: ${TAG}"
+          echo "[INFO] GIT VERSION: ${VERSION_GIT}"
+          echo "[INFO] BUILD: ${BUILD}"
+          echo "[INFO] AUR VERSION: ${VERSION_AUR}"
+
+          if [[ "${VERSION_GIT}" != "${VERSION_AUR}" ]]; then
+            echo "${VERSION_GIT}" > /home/VERSION
+            echo "${BUILD}" > /home/BUILD
+            echo "${TAG}" > /home/TAG
+            echo "change=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "change=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Back-up Original PKGBUILD in Case of Failure
+        run: |
+          cp -r "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}" /home
+
+      - name: Update PKGBUILD and regenerate .SRCINFO
+        if: steps.check.outputs.change == 'true'
+        run: |
+          useradd -m -s /bin/bash builder 2>/dev/null || true
+          mkdir -p /home/builder/build
+
+          cp -a "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/." /home/builder/build/
+          VERSION="$(cat /home/VERSION)"
+          BUILD="$(cat /home/BUILD)"
+          TAG="$(cat /home/TAG)"
+
+          cd /home/builder/build
+          sed -i "s/^pkgver=.*/pkgver=${VERSION}/" PKGBUILD
+          sed -i "s|v\${pkgver}%2B[0-9]*|v\${pkgver}%2B${BUILD}|" PKGBUILD
+
+          # Download new deb and update sha256sums
+          URL="https://github.com/normalllll/BooruFlow/releases/download/${TAG}/linux_amd64.deb"
+          wget -q -O linux_amd64.deb "${URL}"
+          SHA="$(sha256sum linux_amd64.deb | cut -d' ' -f1)"
+          sed -i "s|^sha256sums=.*|sha256sums=(\n  \"${SHA}\"\n)|" PKGBUILD
+          rm -f linux_amd64.deb
+
+          chown -R builder:builder /home/builder/build
+          runuser -u builder -- bash -lc '
+            cd /home/builder/build
+            makepkg --printsrcinfo > .SRCINFO
+          '
+
+      - name: Push to AUR (if changed)
+        id: aur-push
+        if: steps.check.outputs.change == 'true'
+        env:
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+        run: |
+          cd "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}"
+
+          rm -rf .git .SRCINFO PKGBUILD
+          git init
+          git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git"
+          git fetch aur
+          git checkout -b master aur/master
+
+          cp /home/builder/build/PKGBUILD .
+          cp /home/builder/build/.SRCINFO .
+
+          git config user.name "${{ secrets.AUR_USERNAME }}"
+          git config user.email "${{ secrets.AUR_EMAIL }}"
+
+          git add PKGBUILD .SRCINFO
+          git commit -m "chore: update ${{ env.PKGNAME }} to $(cat /home/VERSION)"
+          git push aur HEAD:master
+
+          rm -rf .git
+
+      - name: Commit to GitHub (if changed)
+        id: gh-push
+        if: steps.check.outputs.change == 'true'
+        run: |
+          cd "${GITHUB_WORKSPACE}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: update ${{ env.PKGNAME }} to $(cat /home/VERSION)"
+          git push origin HEAD
+
+      - name: Cleanup in Case of Failure
+        if: always() && (steps.gh-push.outcome == 'failure' || steps.aur-push.outcome == 'failure')
+        run: |
+          cp "/home/${{ env.PKGNAME }}/PKGBUILD" "/home/${{ env.PKGNAME }}/.SRCINFO" \
+            "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/" || true
+
+          cd "${GITHUB_WORKSPACE}"
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "${{ env.PKGNAME }}/PKGBUILD" "${{ env.PKGNAME }}/.SRCINFO" || true
+
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: cleanup of ${{ env.PKGNAME }} after workflow failure"
+            git pull --rebase
+            git push
+          else
+            echo "No changes to commit after failure"
+          fi
