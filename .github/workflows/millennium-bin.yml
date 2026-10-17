@@ -2,7 +2,7 @@ name: millennium-bin
 
 on:
   schedule:
-    - cron: '0 22 * * *'   # Daily 03:00 UTC (change as needed)
+    - cron: '0 22 * * *'   # Daily 22:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -38,18 +38,16 @@ jobs:
       - name: Check for a new version
         id: check
         run: |
-          mapfile -t VERSIONS_GIT < <(gh api 'repos/SteamClientHomebrew/Millennium/releases?per_page=2' --jq '.[].tag_name')
-          if ! grep 'beta' <<< "${VERSIONS_GIT[0]}" >>/dev/null; then
-            if grep "${VERSIONS_GIT[0]}" <<< "${VERSIONS_GIT[1]}"; then
-              VERSION_GIT="${VERSIONS_GIT[0]}"
-            else
-              VERSION_GIT="${VERSIONS_GIT[1]}"
-            fi
-          else
-            VERSION_GIT="${VERSIONS_GIT[0]}"
+          # Newest non-draft release (betas included) that already has the linux tarball uploaded
+          TAG="$(gh api 'repos/SteamClientHomebrew/Millennium/releases?per_page=10' \
+            --jq '[.[] | select(.draft | not) | select(any(.assets[]; .name | endswith("-linux-x86_64.tar.gz")))][0].tag_name')"
+
+          if [[ -z "${TAG}" || "${TAG}" == "null" ]]; then
+            echo "[ERROR] Could not determine upstream release tag"
+            exit 1
           fi
 
-          VERSION_GIT="$(sed -s 's/^v//;s/-/_/g' <<< "${VERSION_GIT}")"
+          VERSION_GIT="$(sed 's/^v//;s/-/_/g' <<< "${TAG}")"
           VERSION_AUR="$(cat "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/PKGBUILD" | grep '^pkgver=' | cut -d= -f2 | sed 's/^"//;s/"$//')"
 
           echo "[INFO] GIT VERSION: ${VERSION_GIT}"
@@ -75,6 +73,7 @@ jobs:
 
           cp -a "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/." /home/builder/build/
           sed -i 's/^pkgver=.*/pkgver='"$(cat /home/VERSION)"'/' /home/builder/build/PKGBUILD
+          sed -i 's/^pkgrel=.*/pkgrel=1/' /home/builder/build/PKGBUILD
 
           chown -R builder:builder /home/builder/build
           runuser -u builder -- bash -lc '
