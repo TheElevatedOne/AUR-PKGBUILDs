@@ -20,6 +20,8 @@ Collection of the packages I am maintaining on AUR
 - [hyprdown-bin](#hyprdown-bin)
 - [waycentral-bin](#waycentral-bin)
 - [waycentral-git](#waycentral-git)
+- [ghost-dl-bin](#ghost-dl-bin)
+- [ghost-dl-git](#ghost-dl-git)
 
 ## Packages
 
@@ -160,4 +162,20 @@ Collection of the packages I am maintaining on AUR
 
 - ***Centralized Program for Waybar Custom Modules, git version.***
 - **Github Repository:** https://github.com/TheElevatedOne/waycentral
+- **Reason for Packaging:** My own project.
+
+### ghost-dl-bin
+
+[![ghost-dl-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ghost-dl-bin.yml?style=for-the-badge&logo=archlinux&label=ghost-dl-bin)](https://aur.archlinux.org/packages/ghost-dl-bin)
+
+- ***Kingdom Hearts Insider Game OST Archive Downloader CLI/TUI, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/ghost-dl
+- **Reason for Packaging:** My own project.
+
+### ghost-dl-git
+
+[![ghost-dl-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ghost-dl-git.yml?style=for-the-badge&logo=archlinux&label=ghost-dl-git)](https://aur.archlinux.org/packages/ghost-dl-git)
+
+- ***Kingdom Hearts Insider Game OST Archive Downloader CLI/TUI, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/ghost-dl
 - **Reason for Packaging:** My own project.
