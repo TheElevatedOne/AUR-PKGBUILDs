@@ -4,11 +4,22 @@ Collection of the packages I am maintaining on AUR
 
 ## Table of Contents
 
-- [astra-music-bin](#astra-music-bin)
+- [astra-music-git](#astra-music-git)
 - [grok-desktop-bin](#grok-desktop-bin)
 - [starnet2-bin](#starnet2-bin)
 - [millennium-bin](#millennium-bin)
 - [deepskystacker-bin](#deepskystacker-bin)
+- [booruflow-bin](#booruflow-bin)
+- [k86-software-bin](#k86-software-bin)
+- [k86-software-git](#k86-software-git)
+- [rossat-swarm-bin](#rossat-swarm-bin)
+- [rossat-swarm-git](#rossat-swarm-git)
+- [ddc-controls-bin](#ddc-controls-bin)
+- [libddcci-git](#libddcci-git)
+- [blockfont-git](#blockfont-git)
+- [hyprdown-bin](#hyprdown-bin)
+- [waycentral-bin](#waycentral-bin)
+- [waycentral-git](#waycentral-git)
 
 ## Packages
 
@@ -70,3 +81,83 @@ Collection of the packages I am maintaining on AUR
 - ***An open-source, cross-platform booru browser and image downloader.***
 - **Github Repository:** https://github.com/normalllll/BooruFlow
 - **Reason for Packaging:** Good looking Image Board App for Desktop? Sign me on.
+
+### k86-software-bin
+
+[![k86-software-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/k86-software-bin.yml?style=for-the-badge&logo=archlinux&label=k86-software-bin)](https://aur.archlinux.org/packages/k86-software-bin)
+
+- ***Configuration software for the Attack Shark K86 keyboard (CLI, GTK 3 GUI and C library), prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/K86-Software-Linux
+- **Reason for Packaging:** My own project.
+
+### k86-software-git
+
+[![k86-software-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/k86-software-git.yml?style=for-the-badge&logo=archlinux&label=k86-software-git)](https://aur.archlinux.org/packages/k86-software-git)
+
+- ***Configuration software for the Attack Shark K86 keyboard (CLI, GTK 3 GUI and C library), git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/K86-Software-Linux
+- **Reason for Packaging:** My own project.
+
+### rossat-swarm-bin
+
+[![rossat-swarm-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/rossat-swarm-bin.yml?style=for-the-badge&logo=archlinux&label=rossat-swarm-bin)](https://aur.archlinux.org/packages/rossat-swarm-bin)
+
+- ***Open re-implementation of ROCCAT Swarm (GUI, CLI, library) for the Kone AIMO Remastered, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/rossat-swarm
+- **Reason for Packaging:** My own project.
+
+### rossat-swarm-git
+
+[![rossat-swarm-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/rossat-swarm-git.yml?style=for-the-badge&logo=archlinux&label=rossat-swarm-git)](https://aur.archlinux.org/packages/rossat-swarm-git)
+
+- ***Open re-implementation of ROCCAT Swarm (GUI, CLI, library) for the Kone AIMO Remastered, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/rossat-swarm
+- **Reason for Packaging:** My own project.
+
+### ddc-controls-bin
+
+[![ddc-controls-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ddc-controls-bin.yml?style=for-the-badge&logo=archlinux&label=ddc-controls-bin)](https://aur.archlinux.org/packages/ddc-controls-bin)
+
+- ***GTK3 monitor control panel for DDC/CI (libddcci) and backlights, with a waybar module, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/ddc-controls
+- **Reason for Packaging:** My own project.
+
+### libddcci-git
+
+[![libddcci-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/libddcci-git.yml?style=for-the-badge&logo=archlinux&label=libddcci-git)](https://aur.archlinux.org/packages/libddcci-git)
+
+- ***DDC/CI (VESA MCCS) C Library.***
+- **Github Repository:** https://github.com/TheElevatedOne/libddcci
+- **Reason for Packaging:** My own project.
+
+### blockfont-git
+
+[![blockfont-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/blockfont-git.yml?style=for-the-badge&logo=archlinux&label=blockfont-git)](https://aur.archlinux.org/packages/blockfont-git)
+
+- ***C shared library that renders text using a 6x5 grid of ASCII blocks, with scaling and ANSI colors.***
+- **Github Repository:** https://github.com/TheElevatedOne/blockfont.h
+- **Reason for Packaging:** My own project.
+
+### hyprdown-bin
+
+[![hyprdown-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/hyprdown-bin.yml?style=for-the-badge&logo=archlinux&label=hyprdown-bin)](https://aur.archlinux.org/packages/hyprdown-bin)
+
+- ***A CLI counterpart to hyprshutdown for Hyprland.***
+- **Github Repository:** https://github.com/TheElevatedOne/hyprdown
+- **Reason for Packaging:** My own project.
+
+### waycentral-bin
+
+[![waycentral-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/waycentral-bin.yml?style=for-the-badge&logo=archlinux&label=waycentral-bin)](https://aur.archlinux.org/packages/waycentral-bin)
+
+- ***Centralized Program for Waybar Custom Modules, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/waycentral
+- **Reason for Packaging:** My own project.
+
+### waycentral-git
+
+[![waycentral-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/waycentral-git.yml?style=for-the-badge&logo=archlinux&label=waycentral-git)](https://aur.archlinux.org/packages/waycentral-git)
+
+- ***Centralized Program for Waybar Custom Modules, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/waycentral
+- **Reason for Packaging:** My own project.
