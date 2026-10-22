@@ -2,7 +2,7 @@ name: k86-software-bin
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '20 2 * * *'
   workflow_dispatch:
 
 jobs:
