@@ -1,11 +1,17 @@
 pkgbase = waycentral-bin
-	pkgdesc = Centralized Program for Waybar Custom Modules, with a C library (libwaycentral)
+	pkgdesc = Centralized Program for Waybar Custom Modules (clock, updates, volume, music, network, tray, ...) with a C library
 	pkgver = 1.2.1
 	pkgrel = 1
 	url = https://github.com/TheElevatedOne/waycentral
 	arch = x86_64
 	license = GPL-3.0-or-later
 	depends = glibc
+	depends = pacman
+	depends = curl
+	depends = json-c
+	depends = libpulse
+	depends = systemd-libs
+	depends = gtk3
 	provides = waycentral=1.2.1
 	provides = libwaycentral.so
 	conflicts = waycentral
