@@ -1,7 +1,7 @@
 # Maintainer: Adam 'TheElevatedOne' Mladý <admin@elevated.ovh> -> https://github.com/TheElevatedOne
 
 pkgname=waycentral-bin
-pkgver=1.1.4
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="Centralized Program for Waybar Custom Modules, with a C library (libwaycentral)"
 arch=('x86_64')
@@ -11,7 +11,7 @@ depends=('glibc')
 provides=("waycentral=${pkgver}" 'libwaycentral.so')
 conflicts=('waycentral')
 source=("waycentral-${pkgver}.tar.gz::https://github.com/TheElevatedOne/waycentral/releases/download/${pkgver}/waycentral-${pkgver}.tar.gz")
-sha256sums=('505d7eeba6dd6d39c08dbee3218aaa3e488e2085b4b9225524b418fd9f5a7703')
+sha256sums=('631039df0ff4339e3af24c454fe933bf16cba3557557290404aa9e5e262b30cd')
 
 package() {
   cd "${srcdir}"
