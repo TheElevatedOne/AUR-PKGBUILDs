@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Install Tools
         run: |
-          pacman -Syu --noconfirm git openssh jq github-cli
+          pacman -Syu --noconfirm git openssh jq github-cli pacman-contrib
 
       - uses: actions/checkout@v4
         with:
@@ -75,6 +75,8 @@ jobs:
           chown -R builder:builder /home/builder/build
           runuser -u builder -- bash -lc '
             cd /home/builder/build
+            updpkgsums
+            rm -f ./*.tar.gz
             makepkg --printsrcinfo > .SRCINFO
           '
 
