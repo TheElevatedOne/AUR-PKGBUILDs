@@ -4,85 +4,79 @@ Collection of the packages I am maintaining on AUR
 
 ## Table of Contents
 
-- [astra-music-git](#astra-music-git)
-- [grok-desktop-bin](#grok-desktop-bin)
-- [starnet2-bin](#starnet2-bin)
-- [millennium-bin](#millennium-bin)
-- [deepskystacker-bin](#deepskystacker-bin)
-- [booruflow-bin](#booruflow-bin)
-- [k86-software-bin](#k86-software-bin)
-- [k86-software-git](#k86-software-git)
-- [rossat-swarm-bin](#rossat-swarm-bin)
-- [rossat-swarm-git](#rossat-swarm-git)
-- [ddc-controls-bin](#ddc-controls-bin)
-- [libddcci-git](#libddcci-git)
-- [blockfont-git](#blockfont-git)
-- [hyprdown-bin](#hyprdown-bin)
-- [waycentral-bin](#waycentral-bin)
-- [waycentral-git](#waycentral-git)
-- [ghost-dl-bin](#ghost-dl-bin)
-- [ghost-dl-git](#ghost-dl-git)
+- [My Packages](#my-packages)
+  - [blockfont-git](#blockfont-git)
+  - [ddc-controls-bin](#ddc-controls-bin)
+  - [ddc-controls-git](#ddc-controls-git)
+  - [ghost-dl-bin](#ghost-dl-bin)
+  - [ghost-dl-git](#ghost-dl-git)
+  - [hyprdown-bin](#hyprdown-bin)
+  - [k86-software-bin](#k86-software-bin)
+  - [k86-software-git](#k86-software-git)
+  - [libddcci-git](#libddcci-git)
+  - [rossat-swarm-bin](#rossat-swarm-bin)
+  - [rossat-swarm-git](#rossat-swarm-git)
+  - [waycentral-bin](#waycentral-bin)
+  - [waycentral-git](#waycentral-git)
+  - [wayweather-bin](#wayweather-bin)
+  - [wayweather-git](#wayweather-git)
+- [Third-Party Packages](#third-party-packages)
+  - [astra-music-git](#astra-music-git)
+  - [booruflow-bin](#booruflow-bin)
+  - [deepskystacker-bin](#deepskystacker-bin)
+  - [grok-desktop-bin](#grok-desktop-bin)
+  - [millennium-bin](#millennium-bin)
+  - [starnet2-bin](#starnet2-bin)
 
-## Packages
+## My Packages
 
-### astra-music-git
+### blockfont-git
 
-[![astra-music-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/astra-music-git.yml?style=for-the-badge&logo=git&label=astra-music-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/astra-music-git.yml) [![astra-music-git AUR version](https://img.shields.io/aur/version/astra-music-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/astra-music-git)
+[![blockfont-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/blockfont-git.yml?style=for-the-badge&logo=git&label=blockfont-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/blockfont-git.yml) [![blockfont-git AUR version](https://img.shields.io/aur/version/blockfont-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/blockfont-git)
 
-<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/astra-music-git.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/astra-music-git.png?raw=true"></a>
+- ***C shared library that renders text using a 6x5 grid of ASCII blocks, with scaling and ANSI colors.***
+- **Github Repository:** https://github.com/TheElevatedOne/blockfont.h
+- **Reason for Packaging:** My own project.
 
-- ***Audiophile music player with gapless playback, parametric EQ, AutoEQ import, and real-time DSP visualizers***
-- **Github Repository:** https://github.com/Boof2015/astra
-- **Website:** https://astramusic.dev/
-- **Reason for Packaging:** After switching from AIMP (Windows) to Tauon, then to Fooyin, this is an actually interesting music player project that I want to keep up with.
+### ddc-controls-bin
 
-### grok-desktop-bin
+[![ddc-controls-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ddc-controls-bin.yml?style=for-the-badge&logo=git&label=ddc-controls-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ddc-controls-bin.yml) [![ddc-controls-bin AUR version](https://img.shields.io/aur/version/ddc-controls-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ddc-controls-bin)
 
-[![grok-desktop-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/grok-desktop-bin.yml?style=for-the-badge&logo=git&label=grok-desktop-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/grok-desktop-bin.yml) [![grok-desktop-bin AUR version](https://img.shields.io/aur/version/grok-desktop-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/grok-desktop-bin)
+- ***GTK3 monitor control panel for DDC/CI (libddcci) and backlights, with a waybar module, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/ddc-controls
+- **Reason for Packaging:** My own project.
 
-<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/grok-desktop-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/grok-desktop-bin.png?raw=true"></a>
+### ddc-controls-git
 
-- ***The Grok Desktop Application Wrapper is a versatile tool designed to run on all platforms and architectures. It allows you to use Grok without the need to open a web browser, as it encapsulates the application in its own dedicated wrapper, effectively turning it into a standalone app.***
-- **Github Repository:** https://github.com/Ash-Bash/Grok-Desktop-Wrapper
-- **Reason for Packaging:** I use Grok a lot daily as a faster search engine and I do not have my browser all the time.
+[![ddc-controls-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ddc-controls-git.yml?style=for-the-badge&logo=git&label=ddc-controls-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ddc-controls-git.yml) [![ddc-controls-git AUR version](https://img.shields.io/aur/version/ddc-controls-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ddc-controls-git)
 
-### starnet2-bin
+- ***GTK3 monitor control panel for DDC/CI (libddcci) and backlights, with a waybar module, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/ddc-controls
+- **Reason for Packaging:** My own project.
 
-[![starnet2-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/starnet2-bin.yml?style=for-the-badge&logo=git&label=starnet2-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/starnet2-bin.yml) [![starnet2-bin AUR version](https://img.shields.io/aur/version/starnet2-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/starnet2-bin)
+### ghost-dl-bin
 
-- ***AI-powered software for star removal and noise reduction in astrophotography.***
-- **Website:** https://starnetastro.com/cli-tools/starnet/
-- **Reason for Packaging:** A useful tool for post-processing deep-sky photos.
+[![ghost-dl-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ghost-dl-bin.yml?style=for-the-badge&logo=git&label=ghost-dl-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ghost-dl-bin.yml) [![ghost-dl-bin AUR version](https://img.shields.io/aur/version/ghost-dl-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ghost-dl-bin)
 
-### millennium-bin
+- ***Kingdom Hearts Insider Game OST Archive Downloader CLI/TUI, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/ghost-dl
+- **Reason for Packaging:** My own project.
 
-[![millennium-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/millennium-bin.yml?style=for-the-badge&logo=git&label=millennium-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/millennium-bin.yml) [![millennium-bin AUR version](https://img.shields.io/aur/version/millennium-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/millennium-bin)
+### ghost-dl-git
 
-<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/millennium-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/millennium-bin.png?raw=true"></a>
+[![ghost-dl-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ghost-dl-git.yml?style=for-the-badge&logo=git&label=ghost-dl-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ghost-dl-git.yml) [![ghost-dl-git AUR version](https://img.shields.io/aur/version/ghost-dl-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ghost-dl-git)
 
-- ***Open-source modding framework for creating and managing Steam Client themes and plugins.***
-- **Github Repository:** https://github.com/SteamClientHomebrew/Millennium
-- **Website:** https://steambrew.app/
-- **Reason for Packaging:** Useful utility for themes/plugins for Steam. Build takes a really long time on my system via the official package.
+- ***Kingdom Hearts Insider Game OST Archive Downloader CLI/TUI, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/ghost-dl
+- **Reason for Packaging:** My own project.
 
-### deepskystacker-bin
+### hyprdown-bin
 
-[![deepskystacker-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/deepskystacker-bin.yml?style=for-the-badge&logo=git&label=deepskystacker-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/deepskystacker-bin.yml) [![deepskystacker-bin AUR version](https://img.shields.io/aur/version/deepskystacker-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/deepskystacker-bin)
+[![hyprdown-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/hyprdown-bin.yml?style=for-the-badge&logo=git&label=hyprdown-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/hyprdown-bin.yml) [![hyprdown-bin AUR version](https://img.shields.io/aur/version/hyprdown-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/hyprdown-bin)
 
-<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/deepskystacker-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/deepskystacker-bin.png?raw=true"></a>
-
-- ***A tool for astrophotographers that simplifies all the pre-processing steps of deep sky pictures.***
-- **Github Repository:** https://github.com/deepskystacker/DSS
-- **Website:** http://deepskystacker.free.fr/english/index.html
-- **Reason for Packaging:** Used it a lot on Windows, then a lot via Wine. Linux version should be on the AUR.
-
-### booruflow-bin
-
-[![booruflow-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/booruflow-bin.yml?style=for-the-badge&logo=git&label=booruflow-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/booruflow-bin.yml) [![booruflow-bin AUR version](https://img.shields.io/aur/version/booruflow-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/booruflow-bin)
-
-- ***An open-source, cross-platform booru browser and image downloader.***
-- **Github Repository:** https://github.com/normalllll/BooruFlow
-- **Reason for Packaging:** Good looking Image Board App for Desktop? Sign me on.
+- ***A CLI counterpart to hyprshutdown for Hyprland.***
+- **Github Repository:** https://github.com/TheElevatedOne/hyprdown
+- **Reason for Packaging:** My own project.
 
 ### k86-software-bin
 
@@ -98,6 +92,14 @@ Collection of the packages I am maintaining on AUR
 
 - ***Configuration software for the Attack Shark K86 keyboard (CLI, GTK 3 GUI and C library), git version.***
 - **Github Repository:** https://github.com/TheElevatedOne/K86-Software-Linux
+- **Reason for Packaging:** My own project.
+
+### libddcci-git
+
+[![libddcci-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/libddcci-git.yml?style=for-the-badge&logo=git&label=libddcci-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/libddcci-git.yml) [![libddcci-git AUR version](https://img.shields.io/aur/version/libddcci-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/libddcci-git)
+
+- ***DDC/CI (VESA MCCS) C Library.***
+- **Github Repository:** https://github.com/TheElevatedOne/libddcci
 - **Reason for Packaging:** My own project.
 
 ### rossat-swarm-bin
@@ -116,38 +118,6 @@ Collection of the packages I am maintaining on AUR
 - **Github Repository:** https://github.com/TheElevatedOne/rossat-swarm
 - **Reason for Packaging:** My own project.
 
-### ddc-controls-bin
-
-[![ddc-controls-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ddc-controls-bin.yml?style=for-the-badge&logo=git&label=ddc-controls-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ddc-controls-bin.yml) [![ddc-controls-bin AUR version](https://img.shields.io/aur/version/ddc-controls-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ddc-controls-bin)
-
-- ***GTK3 monitor control panel for DDC/CI (libddcci) and backlights, with a waybar module, prebuilt.***
-- **Github Repository:** https://github.com/TheElevatedOne/ddc-controls
-- **Reason for Packaging:** My own project.
-
-### libddcci-git
-
-[![libddcci-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/libddcci-git.yml?style=for-the-badge&logo=git&label=libddcci-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/libddcci-git.yml) [![libddcci-git AUR version](https://img.shields.io/aur/version/libddcci-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/libddcci-git)
-
-- ***DDC/CI (VESA MCCS) C Library.***
-- **Github Repository:** https://github.com/TheElevatedOne/libddcci
-- **Reason for Packaging:** My own project.
-
-### blockfont-git
-
-[![blockfont-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/blockfont-git.yml?style=for-the-badge&logo=git&label=blockfont-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/blockfont-git.yml) [![blockfont-git AUR version](https://img.shields.io/aur/version/blockfont-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/blockfont-git)
-
-- ***C shared library that renders text using a 6x5 grid of ASCII blocks, with scaling and ANSI colors.***
-- **Github Repository:** https://github.com/TheElevatedOne/blockfont.h
-- **Reason for Packaging:** My own project.
-
-### hyprdown-bin
-
-[![hyprdown-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/hyprdown-bin.yml?style=for-the-badge&logo=git&label=hyprdown-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/hyprdown-bin.yml) [![hyprdown-bin AUR version](https://img.shields.io/aur/version/hyprdown-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/hyprdown-bin)
-
-- ***A CLI counterpart to hyprshutdown for Hyprland.***
-- **Github Repository:** https://github.com/TheElevatedOne/hyprdown
-- **Reason for Packaging:** My own project.
-
 ### waycentral-bin
 
 [![waycentral-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/waycentral-bin.yml?style=for-the-badge&logo=git&label=waycentral-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/waycentral-bin.yml) [![waycentral-bin AUR version](https://img.shields.io/aur/version/waycentral-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/waycentral-bin)
@@ -164,18 +134,79 @@ Collection of the packages I am maintaining on AUR
 - **Github Repository:** https://github.com/TheElevatedOne/waycentral
 - **Reason for Packaging:** My own project.
 
-### ghost-dl-bin
+### wayweather-bin
 
-[![ghost-dl-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ghost-dl-bin.yml?style=for-the-badge&logo=git&label=ghost-dl-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ghost-dl-bin.yml) [![ghost-dl-bin AUR version](https://img.shields.io/aur/version/ghost-dl-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ghost-dl-bin)
+[![wayweather-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/wayweather-bin.yml?style=for-the-badge&logo=git&label=wayweather-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/wayweather-bin.yml) [![wayweather-bin AUR version](https://img.shields.io/aur/version/wayweather-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/wayweather-bin)
 
-- ***Kingdom Hearts Insider Game OST Archive Downloader CLI/TUI, prebuilt.***
-- **Github Repository:** https://github.com/TheElevatedOne/ghost-dl
+- ***Weather module for Waybar with saved locations, GPS/IP geolocation, a TUI and a C library, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/wayweather
 - **Reason for Packaging:** My own project.
 
-### ghost-dl-git
+### wayweather-git
 
-[![ghost-dl-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/ghost-dl-git.yml?style=for-the-badge&logo=git&label=ghost-dl-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/ghost-dl-git.yml) [![ghost-dl-git AUR version](https://img.shields.io/aur/version/ghost-dl-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/ghost-dl-git)
+[![wayweather-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/wayweather-git.yml?style=for-the-badge&logo=git&label=wayweather-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/wayweather-git.yml) [![wayweather-git AUR version](https://img.shields.io/aur/version/wayweather-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/wayweather-git)
 
-- ***Kingdom Hearts Insider Game OST Archive Downloader CLI/TUI, git version.***
-- **Github Repository:** https://github.com/TheElevatedOne/ghost-dl
+- ***Weather module for Waybar with saved locations, GPS/IP geolocation, a TUI and a C library, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/wayweather
 - **Reason for Packaging:** My own project.
+
+## Third-Party Packages
+
+### astra-music-git
+
+[![astra-music-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/astra-music-git.yml?style=for-the-badge&logo=git&label=astra-music-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/astra-music-git.yml) [![astra-music-git AUR version](https://img.shields.io/aur/version/astra-music-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/astra-music-git)
+
+<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/astra-music-git.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/astra-music-git.png?raw=true"></a>
+
+- ***Audiophile music player with gapless playback, parametric EQ, AutoEQ import, and real-time DSP visualizers***
+- **Github Repository:** https://github.com/Boof2015/astra
+- **Website:** https://astramusic.dev/
+- **Reason for Packaging:** After switching from AIMP (Windows) to Tauon, then to Fooyin, this is an actually interesting music player project that I want to keep up with.
+
+### booruflow-bin
+
+[![booruflow-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/booruflow-bin.yml?style=for-the-badge&logo=git&label=booruflow-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/booruflow-bin.yml) [![booruflow-bin AUR version](https://img.shields.io/aur/version/booruflow-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/booruflow-bin)
+
+- ***An open-source, cross-platform booru browser and image downloader.***
+- **Github Repository:** https://github.com/normalllll/BooruFlow
+- **Reason for Packaging:** Good looking Image Board App for Desktop? Sign me on.
+
+### deepskystacker-bin
+
+[![deepskystacker-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/deepskystacker-bin.yml?style=for-the-badge&logo=git&label=deepskystacker-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/deepskystacker-bin.yml) [![deepskystacker-bin AUR version](https://img.shields.io/aur/version/deepskystacker-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/deepskystacker-bin)
+
+<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/deepskystacker-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/deepskystacker-bin.png?raw=true"></a>
+
+- ***A tool for astrophotographers that simplifies all the pre-processing steps of deep sky pictures.***
+- **Github Repository:** https://github.com/deepskystacker/DSS
+- **Website:** http://deepskystacker.free.fr/english/index.html
+- **Reason for Packaging:** Used it a lot on Windows, then a lot via Wine. Linux version should be on the AUR.
+
+### grok-desktop-bin
+
+[![grok-desktop-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/grok-desktop-bin.yml?style=for-the-badge&logo=git&label=grok-desktop-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/grok-desktop-bin.yml) [![grok-desktop-bin AUR version](https://img.shields.io/aur/version/grok-desktop-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/grok-desktop-bin)
+
+<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/grok-desktop-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/grok-desktop-bin.png?raw=true"></a>
+
+- ***The Grok Desktop Application Wrapper is a versatile tool designed to run on all platforms and architectures. It allows you to use Grok without the need to open a web browser, as it encapsulates the application in its own dedicated wrapper, effectively turning it into a standalone app.***
+- **Github Repository:** https://github.com/Ash-Bash/Grok-Desktop-Wrapper
+- **Reason for Packaging:** I use Grok a lot daily as a faster search engine and I do not have my browser all the time.
+
+### millennium-bin
+
+[![millennium-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/millennium-bin.yml?style=for-the-badge&logo=git&label=millennium-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/millennium-bin.yml) [![millennium-bin AUR version](https://img.shields.io/aur/version/millennium-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/millennium-bin)
+
+<a href="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/millennium-bin.png"><img width=50% src="https://github.com/TheElevatedOne/AUR-PKGBUILDs/blob/main/.github/assets/millennium-bin.png?raw=true"></a>
+
+- ***Open-source modding framework for creating and managing Steam Client themes and plugins.***
+- **Github Repository:** https://github.com/SteamClientHomebrew/Millennium
+- **Website:** https://steambrew.app/
+- **Reason for Packaging:** Useful utility for themes/plugins for Steam. Build takes a really long time on my system via the official package.
+
+### starnet2-bin
+
+[![starnet2-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/starnet2-bin.yml?style=for-the-badge&logo=git&label=starnet2-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/starnet2-bin.yml) [![starnet2-bin AUR version](https://img.shields.io/aur/version/starnet2-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/starnet2-bin)
+
+- ***AI-powered software for star removal and noise reduction in astrophotography.***
+- **Website:** https://starnetastro.com/cli-tools/starnet/
+- **Reason for Packaging:** A useful tool for post-processing deep-sky photos.
