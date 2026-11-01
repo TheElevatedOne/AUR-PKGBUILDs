@@ -14,6 +14,8 @@ Collection of the packages I am maintaining on AUR
   - [k86-software-bin](#k86-software-bin)
   - [k86-software-git](#k86-software-git)
   - [libddcci-git](#libddcci-git)
+  - [qimgv-gtk-bin](#qimgv-gtk-bin)
+  - [qimgv-gtk-git](#qimgv-gtk-git)
   - [rossat-swarm-bin](#rossat-swarm-bin)
   - [rossat-swarm-git](#rossat-swarm-git)
   - [waycentral-bin](#waycentral-bin)
@@ -100,6 +102,22 @@ Collection of the packages I am maintaining on AUR
 
 - ***DDC/CI (VESA MCCS) C Library.***
 - **Github Repository:** https://github.com/TheElevatedOne/libddcci
+- **Reason for Packaging:** My own project.
+
+### qimgv-gtk-bin
+
+[![qimgv-gtk-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/qimgv-gtk-bin.yml?style=for-the-badge&logo=git&label=qimgv-gtk-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/qimgv-gtk-bin.yml) [![qimgv-gtk-bin AUR version](https://img.shields.io/aur/version/qimgv-gtk-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/qimgv-gtk-bin)
+
+- ***Fast and easy to use image viewer, GTK 3 rewrite of qimgv with JPEG XL, AVIF, HEIF, APNG and RAW support, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/qimgv-gtk
+- **Reason for Packaging:** My own project.
+
+### qimgv-gtk-git
+
+[![qimgv-gtk-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/qimgv-gtk-git.yml?style=for-the-badge&logo=git&label=qimgv-gtk-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/qimgv-gtk-git.yml) [![qimgv-gtk-git AUR version](https://img.shields.io/aur/version/qimgv-gtk-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/qimgv-gtk-git)
+
+- ***Fast and easy to use image viewer, GTK 3 rewrite of qimgv with JPEG XL, AVIF, HEIF, APNG and RAW support, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/qimgv-gtk
 - **Reason for Packaging:** My own project.
 
 ### rossat-swarm-bin
