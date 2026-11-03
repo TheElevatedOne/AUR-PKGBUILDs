@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Install Tools
         run: |
-          pacman -Syu --noconfirm git openssh jq github-cli wget coreutils
+          pacman -Syu --noconfirm git openssh jq github-cli pacman-contrib
 
       - uses: actions/checkout@v4
         with:
@@ -33,7 +33,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts
+          for i in 1 2 3 4 5; do ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts && break; [ "$i" = 5 ] && exit 1; sleep $((i * 15)); done
 
       - name: Check for a new version
         id: check
@@ -71,22 +71,17 @@ jobs:
           cp -a "${GITHUB_WORKSPACE}/${{ env.PKGNAME }}/." /home/builder/build/
           VERSION="$(cat /home/VERSION)"
           BUILD="$(cat /home/BUILD)"
-          TAG="$(cat /home/TAG)"
 
           cd /home/builder/build
           sed -i "s/^pkgver=.*/pkgver=${VERSION}/" PKGBUILD
+          sed -i "s/^pkgrel=.*/pkgrel=1/" PKGBUILD
           sed -i "s|v\${pkgver}%2B[0-9]*|v\${pkgver}%2B${BUILD}|" PKGBUILD
-
-          # Download new deb and update sha256sums
-          URL="https://github.com/normalllll/BooruFlow/releases/download/${TAG}/linux_amd64.deb"
-          wget -q -O linux_amd64.deb "${URL}"
-          SHA="$(sha256sum linux_amd64.deb | cut -d' ' -f1)"
-          sed -i "s|^sha256sums=.*|sha256sums=(\n  \"${SHA}\"\n)|" PKGBUILD
-          rm -f linux_amd64.deb
 
           chown -R builder:builder /home/builder/build
           runuser -u builder -- bash -lc '
             cd /home/builder/build
+            updpkgsums
+            rm -f ./*.deb
             makepkg --printsrcinfo > .SRCINFO
           '
 

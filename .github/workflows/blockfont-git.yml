@@ -32,7 +32,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts
+          for i in 1 2 3 4 5; do ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts && break; [ "$i" = 5 ] && exit 1; sleep $((i * 15)); done
 
       - name: Check for a new version
         id: check
