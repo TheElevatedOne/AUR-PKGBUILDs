@@ -11,6 +11,7 @@ Collection of the packages I am maintaining on AUR
   - [ghost-dl-bin](#ghost-dl-bin)
   - [ghost-dl-git](#ghost-dl-git)
   - [hyprdown-bin](#hyprdown-bin)
+  - [hyprdown-git](#hyprdown-git)
   - [k86-software-bin](#k86-software-bin)
   - [k86-software-git](#k86-software-git)
   - [libddcci-git](#libddcci-git)
@@ -76,7 +77,15 @@ Collection of the packages I am maintaining on AUR
 
 [![hyprdown-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/hyprdown-bin.yml?style=for-the-badge&logo=git&label=hyprdown-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/hyprdown-bin.yml) [![hyprdown-bin AUR version](https://img.shields.io/aur/version/hyprdown-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/hyprdown-bin)
 
-- ***A CLI counterpart to hyprshutdown for Hyprland.***
+- ***Close every app running under Hyprland without user input, then exit, power off, reboot or log out, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/hyprdown
+- **Reason for Packaging:** My own project.
+
+### hyprdown-git
+
+[![hyprdown-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/hyprdown-git.yml?style=for-the-badge&logo=git&label=hyprdown-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/hyprdown-git.yml) [![hyprdown-git AUR version](https://img.shields.io/aur/version/hyprdown-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/hyprdown-git)
+
+- ***Close every app running under Hyprland without user input, then exit, power off, reboot or log out, git version.***
 - **Github Repository:** https://github.com/TheElevatedOne/hyprdown
 - **Reason for Packaging:** My own project.
 
