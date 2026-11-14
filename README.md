@@ -14,9 +14,13 @@ Collection of the packages I am maintaining on AUR
   - [hyprdown-git](#hyprdown-git)
   - [k86-software-bin](#k86-software-bin)
   - [k86-software-git](#k86-software-git)
+  - [lib32-reshade-linux-bin](#lib32-reshade-linux-bin)
+  - [lib32-reshade-linux-git](#lib32-reshade-linux-git)
   - [libddcci-git](#libddcci-git)
   - [qimgv-gtk-bin](#qimgv-gtk-bin)
   - [qimgv-gtk-git](#qimgv-gtk-git)
+  - [reshade-linux-bin](#reshade-linux-bin)
+  - [reshade-linux-git](#reshade-linux-git)
   - [rossat-swarm-bin](#rossat-swarm-bin)
   - [rossat-swarm-git](#rossat-swarm-git)
   - [waycentral-bin](#waycentral-bin)
@@ -105,6 +109,22 @@ Collection of the packages I am maintaining on AUR
 - **Github Repository:** https://github.com/TheElevatedOne/K86-Software-Linux
 - **Reason for Packaging:** My own project.
 
+### lib32-reshade-linux-bin
+
+[![lib32-reshade-linux-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/lib32-reshade-linux-bin.yml?style=for-the-badge&logo=git&label=lib32-reshade-linux-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/lib32-reshade-linux-bin.yml) [![lib32-reshade-linux-bin AUR version](https://img.shields.io/aur/version/lib32-reshade-linux-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/lib32-reshade-linux-bin)
+
+- ***32-bit Vulkan layer of ReShade for Linux, for 32-bit native and Proton games (needs reshade-linux), prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/reshade-linux
+- **Reason for Packaging:** My own project, a Linux port of crosire's ReShade.
+
+### lib32-reshade-linux-git
+
+[![lib32-reshade-linux-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/lib32-reshade-linux-git.yml?style=for-the-badge&logo=git&label=lib32-reshade-linux-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/lib32-reshade-linux-git.yml) [![lib32-reshade-linux-git AUR version](https://img.shields.io/aur/version/lib32-reshade-linux-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/lib32-reshade-linux-git)
+
+- ***32-bit Vulkan layer of ReShade for Linux, for 32-bit native and Proton games (needs reshade-linux), git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/reshade-linux
+- **Reason for Packaging:** My own project, a Linux port of crosire's ReShade.
+
 ### libddcci-git
 
 [![libddcci-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/libddcci-git.yml?style=for-the-badge&logo=git&label=libddcci-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/libddcci-git.yml) [![libddcci-git AUR version](https://img.shields.io/aur/version/libddcci-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/libddcci-git)
@@ -128,6 +148,22 @@ Collection of the packages I am maintaining on AUR
 - ***Fast and easy to use image viewer, GTK 3 rewrite of qimgv with JPEG XL, AVIF, HEIF, APNG and RAW support, git version.***
 - **Github Repository:** https://github.com/TheElevatedOne/qimgv-gtk
 - **Reason for Packaging:** My own project.
+
+### reshade-linux-bin
+
+[![reshade-linux-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/reshade-linux-bin.yml?style=for-the-badge&logo=git&label=reshade-linux-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/reshade-linux-bin.yml) [![reshade-linux-bin AUR version](https://img.shields.io/aur/version/reshade-linux-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/reshade-linux-bin)
+
+- ***crosire's ReShade post-processing injector as a native Vulkan layer, enabled with RESHADE=1 (works with Proton via DXVK/VKD3D), prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/reshade-linux
+- **Reason for Packaging:** My own project, a Linux port of crosire's ReShade.
+
+### reshade-linux-git
+
+[![reshade-linux-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/reshade-linux-git.yml?style=for-the-badge&logo=git&label=reshade-linux-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/reshade-linux-git.yml) [![reshade-linux-git AUR version](https://img.shields.io/aur/version/reshade-linux-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/reshade-linux-git)
+
+- ***crosire's ReShade post-processing injector as a native Vulkan layer, enabled with RESHADE=1 (works with Proton via DXVK/VKD3D), git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/reshade-linux
+- **Reason for Packaging:** My own project, a Linux port of crosire's ReShade.
 
 ### rossat-swarm-bin
 
