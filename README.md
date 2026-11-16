@@ -17,6 +17,8 @@ Collection of the packages I am maintaining on AUR
   - [lib32-reshade-linux-bin](#lib32-reshade-linux-bin)
   - [lib32-reshade-linux-git](#lib32-reshade-linux-git)
   - [libddcci-git](#libddcci-git)
+  - [opencal-bin](#opencal-bin)
+  - [opencal-git](#opencal-git)
   - [qimgv-gtk-bin](#qimgv-gtk-bin)
   - [qimgv-gtk-git](#qimgv-gtk-git)
   - [reshade-linux-bin](#reshade-linux-bin)
@@ -131,6 +133,22 @@ Collection of the packages I am maintaining on AUR
 
 - ***DDC/CI (VESA MCCS) C Library.***
 - **Github Repository:** https://github.com/TheElevatedOne/libddcci
+- **Reason for Packaging:** My own project.
+
+### opencal-bin
+
+[![opencal-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/opencal-bin.yml?style=for-the-badge&logo=git&label=opencal-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/opencal-bin.yml) [![opencal-bin AUR version](https://img.shields.io/aur/version/opencal-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/opencal-bin)
+
+- ***Local calendar and task manager for GTK 4 with command-based sync, plus libopencal for C and Rust, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/opencal
+- **Reason for Packaging:** My own project.
+
+### opencal-git
+
+[![opencal-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/opencal-git.yml?style=for-the-badge&logo=git&label=opencal-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/opencal-git.yml) [![opencal-git AUR version](https://img.shields.io/aur/version/opencal-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/opencal-git)
+
+- ***Local calendar and task manager for GTK 4 with command-based sync, plus libopencal for C and Rust, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/opencal
 - **Reason for Packaging:** My own project.
 
 ### qimgv-gtk-bin
