@@ -46,10 +46,7 @@ jobs:
           echo "[INFO] GIT VERSION: ${VERSION_GIT}"
           echo "[INFO] AUR VERSION: ${VERSION_AUR}"
 
-          ON_AUR="$(curl -s "https://aur.archlinux.org/rpc/v5/info?arg[]=${{ env.PKGNAME }}" | grep -o '"resultcount":[0-9]*' | cut -d: -f2)"
-          echo "[INFO] ON AUR: ${ON_AUR}"
-
-          if [[ "${VERSION_GIT}" != "${VERSION_AUR}" || "${ON_AUR}" == "0" ]]; then
+          if [[ "${VERSION_GIT}" != "${VERSION_AUR}" ]]; then
             echo "${VERSION_GIT}" > /home/VERSION
             echo "${TAG}" > /home/TAG
             echo "change=true" >> "$GITHUB_OUTPUT"
@@ -100,7 +97,7 @@ jobs:
           git init
           git remote add aur "ssh://aur@aur.archlinux.org/${{ env.PKGNAME }}.git"
           for i in 1 2 3 4 5; do git fetch aur && break; [ "$i" = 5 ] && exit 1; sleep $((i * 15)); done
-          git checkout -b master aur/master 2>/dev/null || git checkout -b master
+          git checkout -b master aur/master
 
           cp /home/builder/build/PKGBUILD .
           cp /home/builder/build/.SRCINFO .
