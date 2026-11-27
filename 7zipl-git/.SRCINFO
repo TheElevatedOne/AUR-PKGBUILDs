@@ -1,6 +1,6 @@
 pkgbase = 7zipl-git
 	pkgdesc = 7-Zip File Manager for Linux with a plain GTK 4 interface, using the system 7-Zip library (git version)
-	pkgver = 0.1.0_r0_g9b01828
+	pkgver = 0.1.0_r1_g3f13d97
 	pkgrel = 1
 	url = https://github.com/TheElevatedOne/7zipl
 	arch = x86_64
