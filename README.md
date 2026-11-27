@@ -7,6 +7,8 @@ Collection of the packages I am maintaining on AUR
 - [My Packages](#my-packages)
   - [7zipl-bin](#7zipl-bin)
   - [7zipl-git](#7zipl-git)
+  - [beluga-bin](#beluga-bin)
+  - [beluga-git](#beluga-git)
   - [blockfont-git](#blockfont-git)
   - [ddc-controls-bin](#ddc-controls-bin)
   - [ddc-controls-git](#ddc-controls-git)
@@ -55,6 +57,22 @@ Collection of the packages I am maintaining on AUR
 
 - ***7-Zip File Manager for Linux with a plain GTK 4 interface, using the system 7-Zip library, git version.***
 - **Github Repository:** https://github.com/TheElevatedOne/7zipl
+- **Reason for Packaging:** My own project.
+
+### beluga-bin
+
+[![beluga-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/beluga-bin.yml?style=for-the-badge&logo=git&label=beluga-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/beluga-bin.yml) [![beluga-bin AUR version](https://img.shields.io/aur/version/beluga-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/beluga-bin)
+
+- ***File manager written with plain GTK 4, a rewrite of KDE Dolphin without Qt or KDE Frameworks, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/beluga
+- **Reason for Packaging:** My own project.
+
+### beluga-git
+
+[![beluga-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/beluga-git.yml?style=for-the-badge&logo=git&label=beluga-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/beluga-git.yml) [![beluga-git AUR version](https://img.shields.io/aur/version/beluga-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/beluga-git)
+
+- ***File manager written with plain GTK 4, a rewrite of KDE Dolphin without Qt or KDE Frameworks, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/beluga
 - **Reason for Packaging:** My own project.
 
 ### blockfont-git
