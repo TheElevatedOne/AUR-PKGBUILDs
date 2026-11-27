@@ -5,6 +5,8 @@ Collection of the packages I am maintaining on AUR
 ## Table of Contents
 
 - [My Packages](#my-packages)
+  - [7zipl-bin](#7zipl-bin)
+  - [7zipl-git](#7zipl-git)
   - [blockfont-git](#blockfont-git)
   - [ddc-controls-bin](#ddc-controls-bin)
   - [ddc-controls-git](#ddc-controls-git)
@@ -38,6 +40,22 @@ Collection of the packages I am maintaining on AUR
   - [starnet2-bin](#starnet2-bin)
 
 ## My Packages
+
+### 7zipl-bin
+
+[![7zipl-bin workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/7zipl-bin.yml?style=for-the-badge&logo=git&label=7zipl-bin&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/7zipl-bin.yml) [![7zipl-bin AUR version](https://img.shields.io/aur/version/7zipl-bin?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/7zipl-bin)
+
+- ***7-Zip File Manager for Linux with a plain GTK 4 interface, using the system 7-Zip library, prebuilt.***
+- **Github Repository:** https://github.com/TheElevatedOne/7zipl
+- **Reason for Packaging:** My own project.
+
+### 7zipl-git
+
+[![7zipl-git workflow](https://img.shields.io/github/actions/workflow/status/TheElevatedOne/AUR-PKGBUILDs/7zipl-git.yml?style=for-the-badge&logo=git&label=7zipl-git&labelColor=%23222222)](https://github.com/TheElevatedOne/AUR-PKGBUILDs/actions/workflows/7zipl-git.yml) [![7zipl-git AUR version](https://img.shields.io/aur/version/7zipl-git?style=for-the-badge&logo=archlinux&labelColor=%23111111)](https://aur.archlinux.org/packages/7zipl-git)
+
+- ***7-Zip File Manager for Linux with a plain GTK 4 interface, using the system 7-Zip library, git version.***
+- **Github Repository:** https://github.com/TheElevatedOne/7zipl
+- **Reason for Packaging:** My own project.
 
 ### blockfont-git
 
