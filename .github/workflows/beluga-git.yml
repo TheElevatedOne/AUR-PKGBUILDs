@@ -4,11 +4,6 @@ on:
   schedule:
     - cron: '30 7 * * *'
   workflow_dispatch:
-    inputs:
-      adopt:
-        description: 'Restore the deleted AUR package name and adopt it before pushing (one time)'
-        type: boolean
-        default: false
 
 jobs:
   aur-check-and-update:
@@ -38,14 +33,6 @@ jobs:
           echo "${{ secrets.AUR_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           for i in 1 2 3 4 5; do ssh-keyscan -H aur.archlinux.org >> ~/.ssh/known_hosts && break; [ "$i" = 5 ] && exit 1; sleep $((i * 15)); done
-
-      - name: Restore and adopt the package name (one time)
-        if: github.event_name == 'workflow_dispatch' && inputs.adopt
-        run: |
-          # beluga-git was the name of an unrelated package deleted in 2016; the AUR only takes pushes after
-          # it is restored (as an orphan) and adopted.
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no aur@aur.archlinux.org restore "${{ env.PKGNAME }}" || true
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no aur@aur.archlinux.org adopt "${{ env.PKGNAME }}"
 
       - name: Check for a new version
         id: check
